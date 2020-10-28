@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User_details</title>
+  <style>
+    @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      /* background-color: #3e94ec;  */
+      font-family: "Roboto", helvetica, arial, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      /* text-rendering: optimizeLegibility; */
+    }
+
+    div.table-title {
+      display: block;
+      margin: auto;
+      max-width: 1000px;
+      padding: 5px;
+      width: 100%;
+    }
+
+    .table-title h3 {
+      /* color: #fafafa; */
+      font-size: 30px;
+      font-weight: 400;
+      font-style: normal;
+      font-family: "Roboto", helvetica, arial, sans-serif;
+      text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+      text-transform: uppercase;
+    }
+
+    .add {
+      color: #fff;
+      background-color: #343a45;
+      position: relative;
+      left: 1000px;
+      text-decoration: none;
+      outline: none;
+      padding: 10px 10px;
+      border-radius: 8px;
+      border: 2px solid #343a45;
+    }
+
+    .add:hover {
+      color: #343a45;
+      background-color: #fff;
+
+    }
+
+    /*** Table Styles **/
+
+    .table-fill {
+      background: white;
+      border-radius: 3px;
+      border-collapse: collapse;
+      height: 320px;
+      margin: auto;
+      max-width: 1000px;
+      padding: 5px;
+      width: 100%;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      animation: float 5s infinite;
+      margin-top: 20px;
+    }
+
+    th {
+      color: #D5DDE5;
+      ;
+      background: #1b1e24;
+      border-bottom: 4px solid #9ea7af;
+      border-right: 1px solid #343a45;
+      font-size: 23px;
+      font-weight: 100;
+      padding: 24px;
+      text-align: left;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+      vertical-align: middle;
+    }
+
+    th:first-child {
+      border-top-left-radius: 3px;
+    }
+
+    th:last-child {
+      border-top-right-radius: 3px;
+      border-right: none;
+    }
+
+    tr {
+      border-top: 1px solid #C1C3D1;
+      border-bottom: 1px solid #C1C3D1;
+      color: #666B85;
+      font-size: 16px;
+      font-weight: normal;
+      text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+    }
+
+    tr:hover td {
+      background: #4E5066;
+      color: #FFFFFF;
+      border-top: 1px solid #22262e;
+    }
+
+    tr:first-child {
+      border-top: none;
+    }
+
+    tr:last-child {
+      border-bottom: none;
+    }
+
+    tr:nth-child(odd) td {
+      background: #EBEBEB;
+    }
+
+    tr:nth-child(odd):hover td {
+      background: #4E5066;
+    }
+
+    tr:last-child td:first-child {
+      border-bottom-left-radius: 3px;
+    }
+
+    tr:last-child td:last-child {
+      border-bottom-right-radius: 3px;
+    }
+
+    td {
+      background: #FFFFFF;
+      padding: 20px;
+      text-align: left;
+      vertical-align: middle;
+      font-weight: 300;
+      font-size: 18px;
+      text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+      border-right: 1px solid #C1C3D1;
+    }
+
+    td:last-child {
+      border-right: 0px;
+    }
+
+    th.text-left {
+      text-align: left;
+    }
+
+    th.text-center {
+      text-align: center;
+    }
+
+    th.text-right {
+      text-align: right;
+    }
+
+    td.text-left {
+      text-align: left;
+    }
+
+    td.text-center {
+      text-align: center;
+    }
+
+    td.text-right {
+      text-align: right;
+    }
+
+    .edit {
+      position: relative;
+      left: 30px;
+      text-decoration: none;
+      padding: 10px 10px;
+      border-radius: 8px;
+      color: whitesmoke;
+      background-color: #3e94ec;
+      outline: none;
+    }
+
+    .delete {
+      position: relative;
+      left: 80px;
+      text-decoration: none;
+      padding: 10px 10px;
+      border-radius: 8px;
+      color: whitesmoke;
+      background-color: red;
+      outline: none;
+    }
+
+    /* this is for signup  */
+    .main {
+      display: none;
+      background-color: #FFFFFF;
+      width: 400px;
+      height: 430px;
+      margin: 7em auto;
+      border-radius: 1.5em;
+      box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+    }
+
+    .main .close {
+      position: absolute;
+      margin-top: 8px;
+      margin-left: 365px;
+      height: 40px;
+      cursor: pointer;
+      font-weight: 300;
+      color: black;
+    }
+
+    .sign {
+      padding-top: 40px;
+      color: #8C55AA;
+      font-family: 'Ubuntu', sans-serif;
+      font-weight: bold;
+      font-size: 23px;
+      text-align: center;
+    }
+
+    .un {
+      width: 76%;
+      color: rgb(38, 50, 56);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 1px;
+      background: rgba(136, 126, 126, 0.04);
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      outline: none;
+      box-sizing: border-box;
+      border: 2px solid rgba(0, 0, 0, 0.02);
+      margin-bottom: 50px;
+      margin-left: 46px;
+      text-align: center;
+      margin-bottom: 27px;
+      font-family: 'Ubuntu', sans-serif;
+    }
+
+    form.form1 {
+      padding-top: 40px;
+    }
+
+    .pass {
+      width: 76%;
+      color: rgb(38, 50, 56);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 1px;
+      background: rgba(136, 126, 126, 0.04);
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      outline: none;
+      box-sizing: border-box;
+      border: 2px solid rgba(0, 0, 0, 0.02);
+      margin-bottom: 50px;
+      margin-left: 46px;
+      text-align: center;
+      margin-bottom: 27px;
+      font-family: 'Ubuntu', sans-serif;
+    }
+
+
+    .un:focus,
+    .pass:focus {
+      border: 2px solid rgba(0, 0, 0, 0.18) !important;
+
+    }
+
+    .submit {
+      cursor: pointer;
+      border-radius: 5em;
+      color: #fff;
+      background: linear-gradient(to right, #9C27B0, #E040FB);
+      border: 0;
+      padding-left: 40px;
+      padding-right: 40px;
+      padding-bottom: 10px;
+      padding-top: 10px;
+      font-family: 'Ubuntu', sans-serif;
+      margin-left: 35%;
+      font-size: 13px;
+      box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+    }
+
+    a {
+      text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+      color: #E1BEE7;
+      text-decoration: none
+    }
+
+    @media (max-width: 600px) {
+      .main {
+        border-radius: 0px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="head">
+    <div class="table-title">
+      <h3>User list</h3>
+    </div>
+    <a class="add" >+ Add User</a>
+    <table class="table-fill">
+      <thead>
+        <tr>
+          <th class="text-left">Username</th>
+          <th class="text-left">Name</th>
+          <th class="text-left">Number</th>
+          <th class="text-left">Update</th>
+        </tr>
+      </thead>
+      <tbody class="table-hover">
+        <tr>
+          <td class="text-left">Chid_9515</td>
+          <td class="text-left">Chidvilas</td>
+          <td class="text-left">9515181342</td>
+          <td class="text-left"><a href="" class="edit">Edit</a><a href="" class="delete">Delete</a></td>
+        </tr>
+        <tr>
+          <td class="text-left">Hritik_pan</td>
+          <td class="text-left">Hritik</td>
+          <td class="text-left">8374749965</td>
+          <td class="text-left"><a href="" class="edit">Edit</a><a href="" class="delete">Delete</a></td>
+        </tr>
+        <tr>
+          <td class="text-left">Nanu_0950</td>
+          <td class="text-left">Atharv</td>
+          <td class="text-left">9346980580</td>
+          <td class="text-left"><a href="" class="edit">Edit</a><a href="" class="delete">Delete</a></td>
+        </tr>
+        <tr>
+          <td class="text-left">Aman_@99</td>
+          <td class="text-left">Aman</td>
+          <td class="text-left">7077235490</td>
+          <td class="text-left"><a href="" class="edit">Edit</a><a href="" class="delete">Delete</a></td>
+        </tr>
+        <tr>
+          <td class="text-left">Kumar#oo9</td>
+          <td class="text-left">Ramesh Kumar</td>
+          <td class="text-left">9437379965</td>
+          <td class="text-left"><a href="" class="edit">Edit</a><a href="" class="delete">Delete</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="main">
+    <h1 class="close">X</h1>
+    <p class="sign">User Details</p>
+    <form class="form1">
+      <input class="un " type="text" placeholder="Username">
+      <input class="un " type="text" placeholder="Name">
+      <input class="un " type="number" placeholder="Number">
+      <input class="pass" type="password" placeholder="Password">
+      <a class="submit">Submit</a>
+    </form>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script>
+    $(function () {
+      $(".add").on('click', function () {
+        $(".main").fadeIn(0.1);
+        $(".head").fadeOut(0.1);
+      });
+    });
+    $(function(){
+        $(".close").on('click',function(){
+            $(".head").fadeIn(0.1);
+            $(".main").fadeOut(0.1);
+        });
+    });
+  </script>
+</body>
+
+</html>
