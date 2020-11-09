@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 
 <head>
   <meta charset="UTF-8">
@@ -39,7 +40,7 @@
       text-transform: uppercase;
     }
 
-    .add {
+    .add, .inventory{
       color: #fff;
       background-color: #343a45;
       position: relative;
@@ -51,11 +52,12 @@
       border: 2px solid #343a45;
     }
 
-    .add:hover {
+    .add:hover, .inventory:hover {
       color: #343a45;
       background-color: #fff;
 
     }
+
 
     /*** Table Styles **/
 
@@ -313,6 +315,8 @@
       <h3>User list</h3>
     </div>
     <a class="add" >+ Add User</a>
+    {% csrf_token %}
+    <a class="inventory" href="inventory/dashboard">+ Inventory</a>
     <table class="table-fill">
       <thead>
         <tr>
@@ -323,39 +327,30 @@
         </tr>
       </thead>
       <tbody class="table-hover">
+
+      {%for user in users%}
         <tr>
-          <td class="text-left">Chid_9515</td>
-          <td class="text-left">Chidvilas</td>
-          <td class="text-left">9515181342</td>
+          <td class="text-left">{{user.username}}</td>
+          {%if user.first_name%}
+          <td class="text-left">{{user.first_name}}</td>
+          {% else %}
+            <td class="text-left">name not added</td>
+          {% endif %}
+          {% for mob in mobs %}
+            {% if user.username == mob.username %}
+            <td class="text-left">{{mob.mob_no}}</td>
+            {% comment %} {% else %} {% endcomment %}
+            {% comment %} <td class="text-left">not found</td>            {% endcomment %}
+            {% endif %}
+          {% endfor %}
           <td class="text-left"><a href="" class="edit">Edit</a><a href="" class="delete">Delete</a></td>
         </tr>
-        <tr>
-          <td class="text-left">Hritik_pan</td>
-          <td class="text-left">Hritik</td>
-          <td class="text-left">8374749965</td>
-          <td class="text-left"><a href="" class="edit">Edit</a><a href="" class="delete">Delete</a></td>
-        </tr>
-        <tr>
-          <td class="text-left">Nanu_0950</td>
-          <td class="text-left">Atharv</td>
-          <td class="text-left">9346980580</td>
-          <td class="text-left"><a href="" class="edit">Edit</a><a href="" class="delete">Delete</a></td>
-        </tr>
-        <tr>
-          <td class="text-left">Aman_@99</td>
-          <td class="text-left">Aman</td>
-          <td class="text-left">7077235490</td>
-          <td class="text-left"><a href="" class="edit">Edit</a><a href="" class="delete">Delete</a></td>
-        </tr>
-        <tr>
-          <td class="text-left">Kumar#oo9</td>
-          <td class="text-left">Ramesh Kumar</td>
-          <td class="text-left">9437379965</td>
-          <td class="text-left"><a href="" class="edit">Edit</a><a href="" class="delete">Delete</a></td>
-        </tr>
+      {% endfor %}
+
       </tbody>
     </table>
   </div>
+
   <div class="main">
     <h1 class="close">X</h1>
     <p class="sign">User Details</p>
@@ -382,6 +377,7 @@
             $(".main").fadeOut(0.1);
         });
     });
+
   </script>
 </body>
 
