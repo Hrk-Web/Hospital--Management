@@ -10,3 +10,5 @@ urlpatterns = [
     path('createuser', allauth.create_user, name="createuser"),
     path('inventory/', include("inventory.urls")),
 ]
+
+# this is for fun 
