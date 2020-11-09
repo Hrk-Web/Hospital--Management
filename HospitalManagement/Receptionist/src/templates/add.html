@@ -201,17 +201,18 @@
     <p class="subhead">Medicine Detials</p>
     <div class="container">
         <div class="grid">
-        <form>
+        <form action="add-medicine" method="POST">
+        {% csrf_token %}
             <div class="left">
             <div class="group">
-                <input type="text" required>
+                <input type="text" name="medicine" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label>Name of Medicine</label>
             </div>
 
             <div class="group">
-                <input type="text" required>
+                <input type="text" name="batch" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label>BatchID</label>
@@ -219,39 +220,39 @@
 
             <div class="group">
                 <span class="mfd" >MFD</span>
-                <input type="date" required>
+                <input type="date" name="mfdate" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
             </div>
             <div class="group">
-                <input type="number" required>
+                <input type="number" name="boxes" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label>Number of Boxes</label>
             </div>
             <div class="group">
                 <span class="mfd" >EXD</span>
-                <input type="date" required>
+                <input type="date" name="exdate" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
             </div>
         </div>
         <div class="right" style="display: inline-block; position: relative; top: -493px; left: 800px;" >
             <div class="group" >
-                <input type="number" required>
+                <input type="number" name="invoice" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
                 <label>Inoive number</label>
             </div>
             <div class="group">
-                <input type="number" required>
+                <input type="number" name="pieces" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
-                <label>Number pices</label>
+                <label>Number pieces</label>
             </div>
             <div class="group">
                 <span class="mfd" >Date of purchase</span>
-                <input type="date" required>
+                <input type="date" name="purchase" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
             </div>
