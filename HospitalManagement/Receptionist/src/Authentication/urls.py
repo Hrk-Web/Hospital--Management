@@ -1,9 +1,12 @@
-from django.urls import path
+from django.urls import path, include
 from .views import Authentication
+import inventory
+
+allauth = Authentication()
 
 urlpatterns = [
-    path('', Authentication.authenticate, name="authenticate"),
-    path('login', Authentication.log_in, name="login"),
-    path('createuser', Authentication.create_user, name="createuser"),
-    
+    path('', allauth.authenticate, name="authenticate"),
+    path('login', allauth.log_in, name="login"),
+    path('createuser', allauth.create_user, name="createuser"),
+    path('inventory/', include("inventory.urls")),
 ]
