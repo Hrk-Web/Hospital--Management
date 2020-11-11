@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invontery</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    section{
+        padding: 20px 20px;
+        margin: 20px 20px;
+    }
+</style>
+<body>
+    <section>
+    <table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>batchId</th>
+                <th>MFD</th>
+                <th>No of Medicine</th>
+                <th>EXD</th>
+                <th>DOP</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Paractamole</td>
+                <td>ABB0021</td>
+                <td>12/03/2018</td>
+                <td>610</td>
+                <td>2011/04/25</td>
+                <td>12/06/2020</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <script>
+        $(document).ready(function() {
+                $('#example').DataTable();
+            }
+
+        );
+    </script>
+</body>
+
+</html>
