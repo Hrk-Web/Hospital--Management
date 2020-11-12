@@ -28,13 +28,29 @@ class Inventory:
 
         # saving data here
         med = MedicineData(username=request.user.username, medicine_name=med_name,
-                            batch_id=batch_no, mfd=mf_date, number_of_boxes=no_of_boxes,
-                            exd=exp_date, invoice_no=invoice_no, no_of_pieces=no_of_pieces,
-                            date_of_purchase=purchase_date, 
-                            date_of_added=datetime.now())
+                            batch_id=batch_no, mfd=mf_date, 
+                            number_of_boxes=no_of_boxes,exd=exp_date, 
+                            invoice_no=invoice_no, no_of_pieces=no_of_pieces,
+                            date_of_purchase=purchase_date, date_of_added=datetime.now()
+                        )
         med.save()
 
         if med is not None:
             return render(request, 'medi.html')
         return HttpResponse("failed")
 
+    @csrf_exempt
+    def show_medicines(self, request):
+        obj = MedicineData.objects.all()
+        context = {
+            "meds": obj,
+        }
+        return render(request, 'inv.html', context)
+
+    @csrf_exempt
+    def expiring_list(self, request):
+        return render(request, 'exp.html')
+
+    @csrf_exempt
+    def shortage_list(self, request):
+        return render(request, 'short.html')
