@@ -12,6 +12,7 @@ class MedicineData(models.Model):
     no_of_pieces = models.IntegerField()
     date_of_purchase = models.DateField()
     date_of_added = models.DateTimeField()
+    no_of_days_left = models.CharField(max_length=6, default="0")
 
     def __str__(self):
         return str(self.medicine_name)

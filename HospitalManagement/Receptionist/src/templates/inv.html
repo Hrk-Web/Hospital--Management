@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invontery</title>
+    <title>Inventory</title>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
@@ -35,14 +36,16 @@
             </tr>
         </thead>
         <tbody>
+        {% for med in meds%}
             <tr>
-                <td>Paractamole</td>
-                <td>ABB0021</td>
-                <td>12/03/2018</td>
-                <td>610</td>
-                <td>2011/04/25</td>
-                <td>12/06/2020</td>
+                <td>{{med.medicine_name}}</td>
+                <td>{{med.batch_id}}</td>
+                <td>{{med.mfd}}</td>
+                <td>{{med.number_of_boxes}}</td>
+                <td>{{med.exd}}</td>
+                <td>{{med.date_of_purchase}}</td>
             </tr>
+        {% endfor %}
         </tbody>
     </table>
 </section>

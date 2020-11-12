@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.models import auth, User
 from django.views.decorators.csrf import csrf_exempt
 from .models import UserMobData 
@@ -52,7 +52,13 @@ class Authentication:
 
             if user is not None:
                 if mob is not None:
-                    return HttpResponse("user created")
+                    obj = User.objects.all()
+                    obj1 = UserMobData.objects.all()
+                    context = {
+                    "users": obj,
+                    "mobs": obj1,
+                    }
+                    return render(request, 'create.html', context)
                 else: return HttpResponse("Mobile data not saved")            
             return HttpResponse("user creation failed")
 
