@@ -178,14 +178,16 @@
             </tr>
         </thead>
         <tbody class="table-hover">
+        {% for med in meds%}
             <tr>
-                <td class="text-left">paractamole</td>
-                <td class="text-left">20Bcd</td>
-                <td class="text-left">200</td>
-                <td class="text-left">23/02/2021</td>
-                <td class="text-left">23/02/2018</td>
-                <td class="text-left">23/01/2019</td>
+                <td class="text-left">{{med.medicine_name}}</td>
+                <td class="text-left">{{med.batch_id}}</td>
+                <td class="text-left">{{med.no_of_pieces}}</td>
+                <td class="text-left">{{med.exd}}</td>
+                <td class="text-left">{{med.mfd}}</td>
+                <td class="text-left">{{med.date_of_purchase}}</td>
             </tr>
+        {% endfor %}
         </tbody>
     </table>
 </body>

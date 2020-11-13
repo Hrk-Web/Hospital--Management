@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.views.decorators.csrf import csrf_exempt
-from datetime import datetime
+import datetime
 from .models import MedicineData
 
 # Create your views here.
@@ -26,15 +26,47 @@ class Inventory:
             no_of_pieces = request.POST.get('pieces')
             purchase_date = request.POST.get('purchase')
 
-        # saving data here
-        med = MedicineData(username=request.user.username, medicine_name=med_name,
-                            batch_id=batch_no, mfd=mf_date, number_of_boxes=no_of_boxes,
-                            exd=exp_date, invoice_no=invoice_no, no_of_pieces=no_of_pieces,
-                            date_of_purchase=purchase_date, 
-                            date_of_added=datetime.now())
-        med.save()
+        
+        try:
+            # saving data here
+            med = MedicineData(username=request.user.username, medicine_name=med_name,
+                                batch_id=batch_no, mfd=mf_date, 
+                                number_of_boxes=no_of_boxes,exd=exp_date, 
+                                invoice_no=invoice_no, no_of_pieces=no_of_pieces,
+                                date_of_purchase=purchase_date, date_of_added=datetime.datetime.now(),
+                            )
+            med.save()
 
-        if med is not None:
-            return render(request, 'medi.html')
+            if med is not None:
+                # med.no_of_days_left = str(med.exd - datetime.datetime.now().date())
+                # med.save()
+                return render(request, 'medi.html')
+        except: pass
         return HttpResponse("failed")
 
+    @csrf_exempt
+    def show_medicines(self, request):
+        obj = MedicineData.objects.all().order_by('medicine_name')
+        context = {
+            "meds": obj,
+        }
+        return render(request, 'inv.html', context)
+
+    @csrf_exempt
+    def expiring_list(self, request):
+        obj = MedicineData.objects.all().order_by('exd')
+        for data in obj:
+            data.no_of_days_left = str(data.exd - datetime.datetime.now().date())
+            data.save()
+        context = {
+            "meds": obj,
+        }
+        return render(request, 'exp.html', context)
+
+    @csrf_exempt
+    def shortage_list(self, request):
+        obj = MedicineData.objects.all().order_by('no_of_pieces')
+        context = {
+            "meds": obj,
+        }
+        return render(request, 'short.html', context)

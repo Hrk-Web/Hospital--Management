@@ -339,8 +339,6 @@
           {% for mob in mobs %}
             {% if user.username == mob.username %}
             <td class="text-left">{{mob.mob_no}}</td>
-            {% comment %} {% else %} {% endcomment %}
-            {% comment %} <td class="text-left">not found</td>            {% endcomment %}
             {% endif %}
           {% endfor %}
           <td class="text-left"><a href="" class="edit">Edit</a><a href="" class="delete">Delete</a></td>
