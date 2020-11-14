@@ -14,8 +14,11 @@ class Authentication:
     def log_in(self, request):
         
         if request.method == 'POST':
-            username = request.POST['username']
-            password = request.POST['password']
+            try:
+                username = request.POST['username']
+                password = request.POST['password']
+            except Exception as e:
+                return HttpResponse(e)
 
             user = auth.authenticate(request, username=username, password=password)
             if user is not None:
@@ -44,11 +47,19 @@ class Authentication:
                 number = "not found"
                 password = "not found"
 
-            user = User.objects.create_user(username=username, first_name=name, password=password)
-            user.save()
+            user = None
+            mob = None
+            try:
+                user = User.objects.create_user(username=username, first_name=name, password=password)
+                user.save()
+            except Exception as e:
+                return HttpResponse(e)
 
-            mob = UserMobData(user=user, mob_no=number, username=username)
-            mob.save()
+            try:
+                mob = UserMobData(user=user, mob_no=number, username=username)
+                mob.save()
+            except Exception as e:
+                return HttpResponse(e)
 
             if user is not None:
                 if mob is not None:

@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.views.decorators.csrf import csrf_exempt
 import datetime
-from .models import MedicineData
+from .models import MedicineData, BillHistory
 
 # Create your views here.
 class Inventory:
@@ -25,8 +25,7 @@ class Inventory:
             invoice_no = request.POST.get('invoice')
             no_of_pieces = request.POST.get('pieces')
             purchase_date = request.POST.get('purchase')
-
-        
+  
         try:
             # saving data here
             med = MedicineData(username=request.user.username, medicine_name=med_name,
@@ -70,3 +69,41 @@ class Inventory:
             "meds": obj,
         }
         return render(request, 'short.html', context)
+        
+    @csrf_exempt
+    def billing_history(self, request):
+        obj = BillHistory.objects.all()
+        sum = 0.0
+        for i in obj:
+            sum = sum + i.price
+        context = {
+            "bills": obj,
+            "total": sum,
+        }
+        return render(request, 'bill_history.html', context)
+
+    @csrf_exempt
+    def billing(self, request):
+        return render(request, 'bill.html')
+
+    @csrf_exempt
+    def save_bill(self, request):
+        if request.method == 'POST':
+            nameu = request.POST.get('names')
+            mob = request.POST.get('mob')
+            
+            # repeated slots
+            medi = request.POST.get('med')
+            units = request.POST.get('unit')
+            price = request.POST.get('price')
+
+            print(nameu)
+            print(mob)
+            print(medi)
+            print(price)
+            print(units)
+            print(price)
+
+
+
+        return HttpResponse("hi")

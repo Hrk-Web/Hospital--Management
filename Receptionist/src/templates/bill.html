@@ -71,28 +71,28 @@
 
 <body>
     <h1 class="head">Billing Page </h1>
-    <form>
+    <form action="save-bill" method="POST">
         <div class="in" style="display: inline-block;">
-            <label class="in">Name of the pacient </label><br>
-            <input style="margin-left: 30px; height: 20px; margin-top: 5px;" type="text">
+            <label class="in">Name of the patient </label><br>
+            <input style="margin-left: 30px; height: 20px; margin-top: 5px;" type="text" name="names">
         </div>
         <div class="in" style="display: inline-block;">
             <label class="in">Phone no.</label><br>
-            <input style="margin-left: 30px; height: 20px; margin-top: 5px;" type="number">
+            <input style="margin-left: 30px; height: 20px; margin-top: 5px;" type="number" name="mob">
         </div>
         <div class="box">
             <p class="sub">Medicine Details</p>
             <div class="in" style="display: inline-block;">
                 <label class="in">Name</label><br>
-                <input style="margin-left: 30px; height: 20px; margin-top: 5px;" type="text">
+                <input style="margin-left: 30px; height: 20px; margin-top: 5px;" type="text" name="med">
             </div>
             <div class="in" style="display: inline-block;">
                 <label class="in">No of units</label><br>
-                <input style="margin-left: 30px; height: 20px; margin-top: 5px;" type="number">
+                <input style="margin-left: 30px; height: 20px; margin-top: 5px;" type="number" name="unit">
             </div>
             <div class="in" style="display: inline-block;">
                 <label class="in">Price</label><br>
-                <input style="margin-left: 30px; height: 20px; margin-top: 5px;" type="number" readonly>
+                <input style="margin-left: 30px; height: 20px; margin-top: 5px;" type="number" name="price">
             </div>
             <br>
             <hr>
@@ -100,7 +100,7 @@
             </div>
             <button class="bbn">+Add</button>
         </div>
-        <button>Print</button>
+        <button type="submit" >Print</button>
     </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>

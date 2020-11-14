@@ -17,3 +17,14 @@ class MedicineData(models.Model):
     def __str__(self):
         return str(self.medicine_name)
 
+class BillHistory(models.Model):
+    name = models.CharField(max_length=50)
+    mob_no = models.CharField(max_length=10)
+    quantity = models.IntegerField()
+    price = models.FloatField()
+
+    def __str__(self):
+        return self.name
+
+    
+    
