@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect, Http404
 from django.contrib.auth.models import auth, User
 from django.views.decorators.csrf import csrf_exempt
 from .models import UserMobData 
@@ -7,12 +7,19 @@ from .models import UserMobData
 class Authentication:
 
     @csrf_exempt
+    def staff_here(self, request):
+        return render(request, "login1.html")
+
+    @csrf_exempt
+    def home_view(self, request):
+        return render(request, "home.htm")
+
+    @csrf_exempt
     def authenticate(self, request):
         return render(request, "login.html")
 
-    @csrf_exempt 
-    def log_in(self, request):
-        
+    @csrf_exempt
+    def staff_login(self, request):
         if request.method == 'POST':
             try:
                 username = request.POST['username']
@@ -30,7 +37,35 @@ class Authentication:
                     "users": obj,
                     "mobs": obj1,
                 }
-                return render(request, 'create.html', context)
+                return render(request, 'medi1.html', context)
+
+            return HttpResponse("login failed")
+
+    @csrf_exempt 
+    def log_in(self, request):
+        
+        if request.method == 'POST':
+            try:
+                username = request.POST['username']
+                password = request.POST['password']
+            except Exception as e:
+                return HttpResponse(e)
+
+            user = auth.authenticate(request, username=username, password=password)
+            if user is not None:
+                auth.login(request, user)
+
+                if request.user.username == 'admin':
+                    print('hritik')
+                    obj = User.objects.all()
+                    obj1 = UserMobData.objects.all()
+                    context = {
+                        "users": obj,
+                        "mobs": obj1,
+                    }
+                    return render(request, 'create.html', context)
+                else: 
+                    return HttpResponse("Unauthorised")
             return HttpResponse("login failed")
 
     @csrf_exempt

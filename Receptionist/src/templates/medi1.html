@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard(Medical)</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background: #050801;
+            box-sizing: border-box;
+        }
+        .heading{
+            color: cornsilk;
+            margin-top: 20px;
+            text-align: center;
+        }
+        a{
+            font-family: cursive;
+            position: relative;
+            display: inline-block;
+            padding: 25px 30px;
+            color: #03e9f4;
+            outline: none;
+            font-size: 24px;
+            text-decoration: none;
+            text-transform: uppercase;
+            overflow: hidden;
+            transition: 0.5s;
+            letter-spacing: 4px;
+            -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+        }
+        a:hover{
+            background: #03e9f4;
+            color: #050801;
+            box-shadow: 0 0 5px #03e9f4,
+                        0 0 25px  #03e9f4;
+        }
+        a span{
+            position: absolute;
+            display: block;
+        }
+        a span:nth-child(1){
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #03e9f4);
+            animation: animate 1s linear infinite;
+        }
+        @keyframes animate {
+            0%{
+               left: -100%;
+            }
+            50%,
+            100%{
+                left: 100%;
+            }
+            
+        }
+        a span:nth-child(2){
+            right: 0;
+            top: -100%;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, #03e9f4);
+            animation: animate1 1s linear infinite;
+            animation-delay: 0.25s;
+        }
+        @keyframes animate1 {
+            0%{
+                top: -100%;
+            }
+            50%,
+            100%{
+                top: 100%;
+            }
+        }
+        a span:nth-child(3){
+            bottom: 0;
+            right: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(270deg, transparent, #03e9f4);
+            animation: animate2 1s linear infinite;
+            animation-delay: 0.5s;
+        }
+        @keyframes animate2 {
+            0%{
+                right: -100%;
+            }
+            50%,
+            100%{
+                right: 100%;
+            }
+            
+        }
+        a span:nth-child(4){
+            left: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(360deg, transparent, #03e9f4);
+            animation: animate3 1s linear infinite;
+            animation-delay: 0.75;
+        }
+        @keyframes animate3 {
+            0%{
+                bottom: -100%;
+            }
+            50%,
+            100%{
+                bottom: 100%;
+            }
+            
+        }
+        #main{
+            display: grid;
+            grid-gap: 1rem;
+            grid-template-areas: 
+            'b1 b1 b2 b2'
+            'b3 b3 b4 b4'
+            'b5 b5 b6 b6' ;
+            text-align: center;
+        }
+        #b1{
+            grid-area: b1;
+            margin-top: 100px;
+        }
+        #b2{
+            grid-area: b2;
+            margin-top: 100px;
+            filter: hue-rotate(290deg);
+        }
+        #b3{
+            grid-area: b3;
+            margin-top: 80px;
+        }
+        #b4{
+            grid-area: b4;
+            margin-top: 80px;
+            filter: hue-rotate(290deg);
+        }
+        #b5{
+            grid-area: b5;
+            margin-top: 80px;
+        }
+        #b6{
+            grid-area: b6;
+            margin-top: 80px;
+            filter: hue-rotate(290deg);
+        }
+    </style>
+</head>
+<body>
+    <h1 class="heading">Medical Dashboard</h1>
+<!-- <div style="display: flex; flex-wrap: wrap; align-content: space-between; justify-content: center; height: 300px; align-items: stretch; "> -->
+<div id="main">
+    <div id="b1">
+    <a href="inventory/medi-list">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Inventory
+    </a>
+</div>
+<div id="b2">
+    <a href="inventory/stocks">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Stock Update
+    </a>
+</div>
+<div id="b3">
+    <a href="inventory/billing">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Billing
+    </a>
+</div>
+<div id="b4">
+   <a href="inventory/bill-history">
+       <span></span>
+       <span></span>
+       <span></span>
+       <span></span>
+       Bill History
+   </a>
+</div>
+<div id="b5">
+   <a href="inventory/shortage-med">
+       <span></span>
+       <span></span>
+       <span></span>
+       <span></span>
+       Shortage List
+   </a>
+</div>
+<div id="b6">
+   <a href="inventory/expiring-soon">
+       <span></span>
+       <span></span>
+       <span></span>
+       <span></span>
+       Expiring Soon
+   </a>
+</div>
+</div>
+</body>
+</html>
