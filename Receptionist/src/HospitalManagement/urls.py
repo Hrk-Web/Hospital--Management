@@ -22,6 +22,7 @@ obj = Authentication()
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home', obj.home_view, name="home"),
+    path('', obj.home_view, name="home"),
     path('staff/', include('authentication.urls')),
     path('owner/', include('authentication.urls')),
 ]

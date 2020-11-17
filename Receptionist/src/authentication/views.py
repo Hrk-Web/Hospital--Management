@@ -2,22 +2,36 @@ from django.shortcuts import render, HttpResponse, redirect, Http404
 from django.contrib.auth.models import auth, User
 from django.views.decorators.csrf import csrf_exempt
 from .models import UserMobData 
+from inventory.models import MedicineData
 
 # Create your views here.
 class Authentication:
 
+    # login page for staff
     @csrf_exempt
     def staff_here(self, request):
         return render(request, "login1.html")
+
+    # login page for owner
+    @csrf_exempt
+    def owner_here(self, request):
+        return render(request, "login.html")
+
+    @csrf_exempt
+    def users_list(self, request):
+        users = User.objects.all()
+        mobs = UserMobData.objects.all()
+        context = {
+            "users": users,
+            "mobs": mobs,
+        }
+        return render(request, "create.html", context)
 
     @csrf_exempt
     def home_view(self, request):
         return render(request, "home.htm")
 
-    @csrf_exempt
-    def authenticate(self, request):
-        return render(request, "login.html")
-
+    # login credential for staff
     @csrf_exempt
     def staff_login(self, request):
         if request.method == 'POST':
@@ -31,18 +45,17 @@ class Authentication:
             if user is not None:
                 auth.login(request, user)
 
-                obj = User.objects.all()
-                obj1 = UserMobData.objects.all()
                 context = {
-                    "users": obj,
-                    "mobs": obj1,
-                }
-                return render(request, 'medi1.html', context)
 
+                    "status": 'staff',
+                    "status1": 'staff1'
+                }
+                return render(request, 'medi.html', context)
             return HttpResponse("login failed")
 
+    # login credential for owner
     @csrf_exempt 
-    def log_in(self, request):
+    def owner_login(self, request):
         
         if request.method == 'POST':
             try:
@@ -56,14 +69,30 @@ class Authentication:
                 auth.login(request, user)
 
                 if request.user.username == 'admin':
-                    print('hritik')
-                    obj = User.objects.all()
-                    obj1 = UserMobData.objects.all()
+
+                    obj = MedicineData.objects.all().order_by('no_of_pieces')
+                    medicines = MedicineData.objects.all().order_by('medicine_name')
+                    short = 0
+                    exp = 0
+                    for i in obj:
+                        if i.no_of_pieces <= 50:
+                            short += 1
+                        left = i.no_of_days_left 
+                        for j in left:
+                            if j == ' ':
+                                p = left[0: left.index(j)]
+                                if int(p) <= 50:
+                                    exp += 1
+                    
                     context = {
-                        "users": obj,
-                        "mobs": obj1,
+                        "meds": obj,
+                        "total_medicine": len(medicines),
+                        "status": 'super',
+                        "status1": 'super1',
+                        "shortage_med": short,
+                        "expiring": exp/2,
                     }
-                    return render(request, 'create.html', context)
+                    return render(request, 'inv.html', context)
                 else: 
                     return HttpResponse("Unauthorised")
             return HttpResponse("login failed")

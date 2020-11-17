@@ -46,8 +46,16 @@ class Inventory:
     @csrf_exempt
     def show_medicines(self, request):
         obj = MedicineData.objects.all().order_by('medicine_name')
+
+        status = "staff"
+        status1 = "staff1"
+        if request.user.is_staff:
+            status = "super"
+            status1 = "super1"
         context = {
             "meds": obj,
+            "status": status,
+            "status1": status1,
         }
         return render(request, 'inv.html', context)
 
@@ -65,8 +73,16 @@ class Inventory:
     @csrf_exempt
     def shortage_list(self, request):
         obj = MedicineData.objects.all().order_by('no_of_pieces')
+
+        status = "staff"
+        status1 = "staff1"
+        if request.user.is_staff:
+            status = "super"
+            status1 = "super1"
         context = {
             "meds": obj,
+            "status": status,
+            "status1": status1,
         }
         return render(request, 'short.html', context)
         
@@ -76,9 +92,19 @@ class Inventory:
         sum = 0.0
         for i in obj:
             sum = sum + i.price
+
+        status = "staff"
+        status1 = "staff1"
+        
+        if request.user.is_staff:
+            status = "super"
+            status1 = "super1"
+            
         context = {
             "bills": obj,
             "total": sum,
+            "status": status,
+            "status1": status1,
         }
         return render(request, 'bill_history.html', context)
 
