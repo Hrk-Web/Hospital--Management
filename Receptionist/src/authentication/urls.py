@@ -11,6 +11,8 @@ urlpatterns = [
     path('createuser', allauth.create_user, name="createuser"),
     path('inventory/', include("inventory.urls")),
     path('users-list', allauth.users_list, name="users"),
+    path('delete-user', allauth.delete_user, name="delete_user"),
+    path('deleting', allauth.deleting_user, name="deleting_user"),
 ]
 
 # this is for fun 

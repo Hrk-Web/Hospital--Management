@@ -130,10 +130,61 @@ class Authentication:
                     obj = User.objects.all()
                     obj1 = UserMobData.objects.all()
                     context = {
-                    "users": obj,
-                    "mobs": obj1,
+                        "users": obj,
+                        "mobs": obj1,
                     }
                     return render(request, 'create.html', context)
                 else: return HttpResponse("Mobile data not saved")            
             return HttpResponse("user creation failed")
 
+    @csrf_exempt
+    def delete_user(self, request):
+        if request.user.is_staff:
+            return render(request, "delete.htm")
+        obj = User.objects.all()
+        obj1 = UserMobData.objects.all()
+        context = {
+            "users": obj,
+            "mobs": obj1,
+        }
+        return render(request, 'create.html', context)
+    
+    @csrf_exempt
+    def deleting_user(self, request):
+        if request.user.is_staff:
+            if request.method == 'POST':
+                try:
+                    username = request.POST.get('username')
+                except:
+                    obj = User.objects.all()
+                    obj1 = UserMobData.objects.all()
+                    context = {
+                        "users": obj,
+                        "mobs": obj1,
+                    }
+                    return render(request, 'create.html', context)
+                try:
+                    user = User.objects.get(username=username)
+                    user.delete()
+                    obj = User.objects.all()
+                    obj1 = UserMobData.objects.all()
+                    context = {
+                        "users": obj,
+                        "mobs": obj1,
+                    }
+                    return render(request, 'create.html', context)
+
+                except:
+                    obj = User.objects.all()
+                    obj1 = UserMobData.objects.all()
+                    context = {
+                        "users": obj,
+                        "mobs": obj1,
+                    }
+                    return render(request, 'create.html', context)
+
+
+
+
+
+        
