@@ -13,6 +13,8 @@ urlpatterns = [
     path('users-list', allauth.users_list, name="users"),
     path('delete-user', allauth.delete_user, name="delete_user"),
     path('deleting', allauth.deleting_user, name="deleting_user"),
+    path('edit-user', allauth.edit_user, name="edit_user"),
+    path('editting', allauth.editing_user, name="editing_user"),
 ]
 
 # this is for fun 

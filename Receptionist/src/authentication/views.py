@@ -182,9 +182,80 @@ class Authentication:
                         "mobs": obj1,
                     }
                     return render(request, 'create.html', context)
+        else:            
+            obj = User.objects.all()
+            obj1 = UserMobData.objects.all()
+            context = {
+                "users": obj,
+                "mobs": obj1,
+            }
+            return render(request, 'create.html', context)
 
 
+    @csrf_exempt
+    def edit_user(self, request):
+        if request.user.is_staff:
+            return render(request, "edit.htm")
+        obj = User.objects.all()
+        obj1 = UserMobData.objects.all()
+        context = {
+            "users": obj,
+            "mobs": obj1,
+        }
+        return render(request, 'create.html', context)
 
+    @csrf_exempt
+    def editing_user(self, request):
+        if request.user.is_staff:
+            if request.method == 'POST':
+                old_username = request.POST.get('old_username')
+                new_username = request.POST.get('new_username')
+                name = request.POST.get('name')
+                number = request.POST.get('mob')
+                password = request.POST.get('password')
 
+                try:
+                    mob = UserMobData.objects.get(username=old_username)
+                    mob.mob_no = number
+                    mob.username = new_username
+                    mob.save()
+                except:
+                    obj = User.objects.all()
+                    obj1 = UserMobData.objects.all()
+                    context = {
+                        "users": obj,
+                        "mobs": obj1,
+                    }
+                    return render(request, 'create.html', context)
+                try:
+                    user = User.objects.get(username=old_username)
+                    user.username = new_username
+                    user.first_name = name
+                    user.password = password
+                    user.save()
+                except:
+                    obj = User.objects.all()
+                    obj1 = UserMobData.objects.all()
+                    context = {
+                        "users": obj,
+                        "mobs": obj1,
+                    }
+                    return render(request, 'create.html', context)
+                obj = User.objects.all()
+                obj1 = UserMobData.objects.all()
+                context = {
+                    "users": obj,
+                    "mobs": obj1,
+                }
+                return render(request, 'create.html', context)
+
+        else:            
+            obj = User.objects.all()
+            obj1 = UserMobData.objects.all()
+            context = {
+                "users": obj,
+                "mobs": obj1,
+            }
+            return render(request, 'create.html', context)
 
         
