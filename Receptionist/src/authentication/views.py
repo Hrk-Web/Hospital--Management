@@ -68,7 +68,7 @@ class Authentication:
             if user is not None:
                 auth.login(request, user)
 
-                if request.user.username == 'admin':
+                if request.user.is_staff:
 
                     obj = MedicineData.objects.all().order_by('no_of_pieces')
                     medicines = MedicineData.objects.all().order_by('medicine_name')

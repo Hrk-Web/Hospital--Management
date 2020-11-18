@@ -65,8 +65,21 @@ class Inventory:
         for data in obj:
             data.no_of_days_left = str(data.exd - datetime.datetime.now().date())
             data.save()
+
+        medicines = set()
+        for i in obj:
+            left = i.no_of_days_left 
+            for j in left:
+                if j == ' ':
+                    p = left[0: left.index(j)]
+                    if int(p) <= 50:
+                        medicines.add(i)
+        
+        medi = list(medicines)
+                
+
         context = {
-            "meds": obj,
+            "meds": medi,
         }
         return render(request, 'exp.html', context)
 
