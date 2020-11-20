@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editting user</title>
+</head>
+<body>
+    <div>
+        {%csrf_token%}
+        <form action="editting" method="post">
+            <p>
+                <Label> Old Username</Label>
+                <input type="text" placeholder="Enter old username" name="old_username">
+            </p>
+            <p>
+                <Label> New Username</Label>
+                <input type="text" name="new_username">
+            </p>
+            <p>
+                <Label>Name</Label>
+                <input type="text" name="name">
+            </p>
+            <p>
+                <Label>Mobile Number</Label>
+                <input type="text" name="mob">
+            </p>
+            <p>
+                <Label>Password</Label>
+                <input type="text" name="password">
+            </p>
+            <p>
+                <button type="submit">Submit</button>
+            </p>
+
+        </form>
+    </div>
+</body>
+</html>

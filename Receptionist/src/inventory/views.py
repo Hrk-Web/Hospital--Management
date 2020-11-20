@@ -46,8 +46,16 @@ class Inventory:
     @csrf_exempt
     def show_medicines(self, request):
         obj = MedicineData.objects.all().order_by('medicine_name')
+
+        status = "staff"
+        status1 = "staff1"
+        if request.user.is_staff:
+            status = "super"
+            status1 = "super1"
         context = {
             "meds": obj,
+            "status": status,
+            "status1": status1,
         }
         return render(request, 'inv.html', context)
 
@@ -57,16 +65,37 @@ class Inventory:
         for data in obj:
             data.no_of_days_left = str(data.exd - datetime.datetime.now().date())
             data.save()
+
+        medicines = set()
+        for i in obj:
+            left = i.no_of_days_left 
+            for j in left:
+                if j == ' ':
+                    p = left[0: left.index(j)]
+                    if int(p) <= 50:
+                        medicines.add(i)
+        
+        medi = list(medicines)
+                
+
         context = {
-            "meds": obj,
+            "meds": medi,
         }
         return render(request, 'exp.html', context)
 
     @csrf_exempt
     def shortage_list(self, request):
         obj = MedicineData.objects.all().order_by('no_of_pieces')
+
+        status = "staff"
+        status1 = "staff1"
+        if request.user.is_staff:
+            status = "super"
+            status1 = "super1"
         context = {
             "meds": obj,
+            "status": status,
+            "status1": status1,
         }
         return render(request, 'short.html', context)
         
@@ -76,9 +105,19 @@ class Inventory:
         sum = 0.0
         for i in obj:
             sum = sum + i.price
+
+        status = "staff"
+        status1 = "staff1"
+        
+        if request.user.is_staff:
+            status = "super"
+            status1 = "super1"
+            
         context = {
             "bills": obj,
             "total": sum,
+            "status": status,
+            "status1": status1,
         }
         return render(request, 'bill_history.html', context)
 

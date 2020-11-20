@@ -331,7 +331,7 @@
     }
 </style>
 <body>
-    <div class="staff"> <!-- Here u should pass context FOR STAFF PASS "staff"  FOR MAMA PASS "super"  -->
+    <div class={{status}}> <!-- Here u should pass context FOR STAFF PASS "staff"  FOR MAMA PASS "super"  -->
         <nav class="menu" tabindex="0">
           <div class="smartphone-menu-trigger"></div>
           <header class="avatar">
@@ -339,10 +339,10 @@
             <h2>Dr. Jagan Mohan</h2>
           </header>
           <ul>
-            <li tabindex="0" class="icon-dashboard"><span><a href="" style="color: white;">Dashboard</a></span></li>
+            <li tabindex="0" class="icon-dashboard"><span><a style="color: white;">Dashboard</a></span></li>
             <li tabindex="0" class="icon-customers"><i class="fa fa-file-text bill" aria-hidden="true"></i><span
-                class="bills">Bills</span></li>
-            <li tabindex="0" class="icon-users"><span>Users</span></li>
+                class="bills"><a href="inventory/bill-history">Bills</a></span></li>
+            <li tabindex="0" class="icon-users"><span><a href="users-list">Users</a></span></li>
             <li tabindex="0" class="icon-settings"><span>Settings</span></li>
           </ul>
         </nav>
@@ -352,24 +352,24 @@
             <a href="">
               <div class="box1">
                 <p class="bhead">Total Medicine</p>
-                <p class="num">128</p>
+                <p class="num">{{total_medicine}}</p>
               </div>
             </a>
-            <a href="">
+            <a href="inventory/shortage-med">
               <div class="box2">
                 <p class="bhead">Shortage List</p>
-                <p class="num">10</p>
+                <p class="num">{{shortage_med}}</p>
               </div>
             </a>
-            <a href="">
+            <a href="inventory/expiring-soon">
               <div class="box3">
                 <p class="bhead">Expring Soon</p>
-                <p class="num">38</p>
+                <p class="num">{{expiring}}</p>
               </div>
             </a>
           </div>
       </div>
-    <div class="staff1" style="margin: 20px 20px;">  <!-- Here u should pass context FOR STAFF PASS "staff1"  FOR MAMA PASS "super1"  -->
+    <div class={{status1}} style="margin: 20px 20px;">  <!-- Here u should pass context FOR STAFF PASS "staff1"  FOR MAMA PASS "super1"  -->
     <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>

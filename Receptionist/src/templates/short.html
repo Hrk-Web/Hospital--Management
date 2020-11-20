@@ -418,7 +418,7 @@
 </head>
 
 <body>
-    <div class="staff"> <!-- Here u should pass context FOR STAFF PASS "staff"  FOR MAMA PASS "super"  -->
+    <div class={{status}}> <!-- Here u should pass context FOR STAFF PASS "staff"  FOR MAMA PASS "super"  -->
         <nav class="menu" tabindex="0">
           <div class="smartphone-menu-trigger"></div>
           <header class="avatar">
@@ -426,9 +426,9 @@
             <h2>Dr. Jagan Mohan</h2>
           </header>
           <ul>
-            <li tabindex="0" class="icon-dashboard"><span><a href="" style="color: white;">Dashboard</a></span></li>
+            <li tabindex="0" class="icon-dashboard"><span><a href="dashboard" style="color: white;">Dashboard</a></span></li>
             <li tabindex="0" class="icon-customers"><i class="fa fa-file-text bill" aria-hidden="true"></i><span
-                class="bills">Bills</span></li>
+                class="bills"><a href="inventory/bill-history>Bills</a></span></li>
             <li tabindex="0" class="icon-users"><span>Users</span></li>
             <li tabindex="0" class="icon-settings"><span>Settings</span></li>
           </ul>
@@ -437,7 +437,7 @@
           <h1 class="head">Dashboard > Shortage List</h1>
           </div>
       </div>
-    <div class="staff1" style="margin: 20px 20px;">  <!-- Here u should pass context FOR STAFF PASS "staff1"  FOR MAMA PASS "super1"  -->
+    <div class={{status1}} style="margin: 20px 20px;">  <!-- Here u should pass context FOR STAFF PASS "staff1"  FOR MAMA PASS "super1"  -->
     <div class="table-title">
         <h3>Shortage List</h3>
     </div>
@@ -456,6 +456,7 @@
         </thead>
         <tbody class="table-hover">
         {% for med in meds%}
+          {%if med.no_of_pieces <= 50%}
             <tr>
                 <td class="text-left">{{med.medicine_name}}</td>
                 <td class="text-left">{{med.batch_id}}</td>
@@ -464,6 +465,7 @@
                 <td class="text-left">{{med.mfd}}</td>
                 <td class="text-left">{{med.date_of_purchase}}</td>
             </tr>
+          {% endif %}
         {% endfor %}
         </tbody>
     </table>
